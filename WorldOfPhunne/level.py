@@ -1,10 +1,12 @@
-import pygame as pg
+import tkinter
+import pygame   as pg
 import os
 
 from .constants import *
-from .tile import Tile
-from .player import Player
-from .debug import debug
+from .tile      import Tile
+from .player    import Player
+from .enemy     import Enemy
+from .debug     import debug
 
 class Level():
     """
@@ -13,7 +15,6 @@ class Level():
     - CALLS UPDATE METHOD
     """
     def __init__(self):
-        
         #SET UP SPRITE GROUPS
         self.visible_sprites = YSortCameraGroup()
         self.obstacle_sprites = pg.sprite.Group()
@@ -33,10 +34,20 @@ class Level():
                 x = col_index * TILESIZE
                 y = row_index * TILESIZE
                 if col.lower() == 'x':
-                    Tile((x,y), [self.visible_sprites, self.obstacle_sprites])
-                if col.lower() == 'p':
+                    Tile((x, y), [self.visible_sprites, self.obstacle_sprites])
+                elif col.lower() == 'p':
                     self.player = Player((x, y), [self.visible_sprites], self.obstacle_sprites)
-    
+
+        for row_index, row in enumerate(world_map):
+            for col_index, col in enumerate(row):
+                x = col_index * TILESIZE
+                y = row_index * TILESIZE
+                if col.lower() == 'e':
+                    Enemy((x, y), [self.visible_sprites], self.obstacle_sprites, self.player)
+
+
+
+
     def run(self):
         #DRAW ALL VISIBLE SPRITES
         self.visible_sprites.custom_draw(self.player)
