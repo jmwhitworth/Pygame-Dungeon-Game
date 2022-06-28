@@ -16,7 +16,10 @@ class WorldOfPhunne:
         pg.display.set_caption("World of Phunne")
         self.clock = pg.time.Clock()
         
-        self.level = Level() #SET UP THE LEVEL CLASS
+        """
+        LEVEL CLASS GENERATES EVERYTHING AND HANDLES SPRITES
+        """
+        self.level = Level()
     
     def run(self):
         while True:
@@ -26,7 +29,7 @@ class WorldOfPhunne:
                     sys.exit()
             
             self.screen.fill('black')
-            self.level.run() #RUN THE LEVEL EACH LOOP
+            self.level.run() #UPDATE GAME EACH FRAME
             pg.display.update()
             self.clock.tick(FPS)
 

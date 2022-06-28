@@ -7,9 +7,10 @@ class Tile(pg.sprite.Sprite):
     """
     STATIC SPRITES FOR OBSTACLES
     """
-    def __init__(self, position, sprite_groups):
+    def __init__(self, name, position, sprite_groups):
         super().__init__(sprite_groups)
-        self.load_image("stump.png")
+        self.name = name
+        self.load_image(f"{self.name}.png")
         self.rect = self.image.get_rect(topleft = position)
         self.hitbox = self.rect.inflate(0,-10)
     

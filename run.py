@@ -7,4 +7,4 @@ from WorldOfPhunne.game    import WorldOfPhunne
 
 if __name__ == "__main__":
     game = WorldOfPhunne()
-    game.run()
+    game.run() 

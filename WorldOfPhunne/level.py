@@ -1,10 +1,11 @@
-import pygame as pg
+import pygame   as pg
 import os
 
 from .constants import *
-from .tile import Tile
-from .player import Player
-from .debug import debug
+from .tile      import Tile
+from .player    import Player
+from .enemy     import Enemy
+from .debug     import debug
 
 class Level():
     """
@@ -13,29 +14,38 @@ class Level():
     - CALLS UPDATE METHOD
     """
     def __init__(self):
-        
         #SET UP SPRITE GROUPS
-        self.visible_sprites = YSortCameraGroup()
-        self.obstacle_sprites = pg.sprite.Group()
+        self.visible_sprites   = YSortCameraGroup()
+        self.obstacle_sprites  = pg.sprite.Group()
+        self.character_sprites = pg.sprite.Group()
         
-        #GETS GAME SURFACE WITHOUT NEEDING TO PASS AS ARG
         self.display_surface = pg.display.get_surface()
         
-        self.create_map()
+        self.create_map(1)
+        #self.create_map(2)
     
     def create_map(self, level=1):
         #LOAD THE LEVEL FILE PASSED AS PARAMETER
         with open(os.path.join("WorldOfPhunne/rooms", f"{level}.txt"), 'r') as level_file:
             world_map = level_file.readlines()
         
+        #GENERATE TERRAIN AND PLAYER BASED ON MAP FILE
         for row_index, row in enumerate(world_map):
             for col_index, col in enumerate(row):
                 x = col_index * TILESIZE
                 y = row_index * TILESIZE
                 if col.lower() == 'x':
-                    Tile((x,y), [self.visible_sprites, self.obstacle_sprites])
-                if col.lower() == 'p':
-                    self.player = Player((x, y), [self.visible_sprites], self.obstacle_sprites)
+                    Tile("stump", (x, y), [self.visible_sprites, self.obstacle_sprites])
+                elif col.lower() == 'p':
+                    self.player = Player("player", (x, y), [self.visible_sprites], self.obstacle_sprites)
+        
+        #ENEMIES CREATED ON SECOND PASS SO THAT PLAYER IS AVAILABLE TO PASS TO THEM AS ARG
+        for row_index, row in enumerate(world_map):
+            for col_index, col in enumerate(row):
+                x = col_index * TILESIZE
+                y = row_index * TILESIZE
+                if col.lower() == 'e':
+                    Enemy("enemy", (x, y), [self.visible_sprites, self.character_sprites], self.obstacle_sprites, self.player)
     
     def run(self):
         #DRAW ALL VISIBLE SPRITES
