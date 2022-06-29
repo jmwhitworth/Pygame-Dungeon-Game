@@ -1,8 +1,10 @@
 import pygame       as pg
 import os
 
-from .constants      import *
-from .debug          import debug
+from .constants     import *
+from .debug         import debug
+from .attack        import Attack
+from .hit_flash     import Hit_Flash
 
 class Character(pg.sprite.Sprite):
     """
@@ -11,22 +13,32 @@ class Character(pg.sprite.Sprite):
         - COLLISION WITH OBSTACLE SPRITES
         - ANIMATION CYCLING
     """
-    def __init__(self, name, position, sprite_groups, obstacle_sprites):
+    def __init__(self, name, position, sprite_groups, obstacle_sprites, target, damage):
         super().__init__(sprite_groups)
         
+        self.health = 100
         self.name = name
+        self.target = target
+        self.damage = damage
         self.direction = pg.math.Vector2()
         self.facing = "South" #DETERMINES IDLE SPRITE
         self.speed = 1
-        self.animation_interval = FPS/8 #SPEED TO ROTATE ANIMATE FRAME
-        self.counter = [0, 0] #INTERVAL COUNT, COUNT
-        self.attacking = False #IS CHARACTER ATTACKING
-        self.attackCooldown = 0 #FRAMES UNTIL CAN ATTACK AGAIN
+        self.visible_sprites = sprite_groups[0]
+        self.gold = 0
+        
+        self.animation_interval = 100 #FREQUENCY TO CHANGE ANIMATION FRAME IN MS
+        self.last_animation_change = 0 #GAME TICK OF LAST CHANGE
+        self.animation_frame = 0 #CURRENT ANIMATION FRAME TO USE (0-3)
+        
+        self.attacking = False
+        self.attack_cooldown = 500 #TIME IN MS UNTIL PLAYER CAN ATTACK AGAIN
+        self.attack_animation_duration = 200 #TIME IN MS TO SHOW ATTACK FRAME
+        self.last_attack_frame = 0
         
         self.load_animations()
-        self.load_image(self.cycle_south[1])
+        self.load_image(self.cycle_south[1], forced=True)
         self.rect = self.image.get_rect(topleft = position)
-        self.hitbox = self.rect.inflate(-10,-20)
+        self.hitbox = self.rect.inflate(-10,-20) #MAKE HITBOX SMALLER THAN SPRITE FOR MOVEMENT AND COMBAT
         
         self.obstacle_sprites = obstacle_sprites
     
@@ -45,9 +57,10 @@ class Character(pg.sprite.Sprite):
         """
         pass
     
-    def load_image(self, image_file_name, size=(30,32)):
-        if self.attackCooldown <= 10: #ONLY CHANGE IMAGE IF CHARACTER ISN'T ATTACKING
-            self.image = pg.image.load(os.path.join("assets", image_file_name)).convert_alpha()
+    def load_image(self, image_file_name, size=(30,32), forced=False):
+        current_tick = pg.time.get_ticks()
+        if current_tick - self.last_attack_frame >= self.attack_animation_duration or forced:
+            self.image = pg.image.load(os.path.join("assets/characters", image_file_name)).convert_alpha()
             self.image = pg.transform.scale(self.image, size) #SCALE THE 16X16 IMAGE TO GIVEN SIZE
     
     def move(self):
@@ -61,16 +74,25 @@ class Character(pg.sprite.Sprite):
         self.rect.center = self.hitbox.center
     
     def attack(self):
-        if self.attackCooldown > 0:
-            self.attackCooldown -= 1
-        elif self.attacking:
-            self.load_image(f"{self.name}/attack_{self.facing}.png")
-            print(self.check_hit(self.facing)) #GET SPRITE OF CHARACTER HIT
-            self.attackCooldown = int(FPS/10 + 10) #RESET COOLDOWN
+        if self.attacking:
+            current_tick = pg.time.get_ticks()
+            if current_tick - self.last_attack_frame >= self.attack_cooldown:
+                self.load_image(f"{self.name}/attack_{self.facing}.png", forced=True) #LOAD APPROPRIATE ATTACK SPRITE
+                
+                #OFFSET THE SPRITE TO SPAWN IN THE DIRECTION PLAYER IS FACING
+                if self.facing == "North":
+                    attack_position = (self.rect.x, self.rect.y - self.rect.height)
+                elif self.facing == "South":
+                    attack_position = (self.rect.x, self.rect.y + self.rect.height)
+                elif self.facing == "East":
+                    attack_position = (self.rect.x + self.rect.width, self.rect.y)
+                elif self.facing == "West":
+                    attack_position = (self.rect.x - self.rect.width, self.rect.y)
+                
+                Attack([self.visible_sprites], attack_position, self.attack_animation_duration, self.visible_sprites, [self.target, "treasure_chest"], self.damage)
+                
+                self.last_attack_frame = current_tick
         self.attacking = False
-    
-    def check_hit(self, direction):
-        return f"{self.name} hit {direction}"
     
     def collision(self,direction):
         """
@@ -98,13 +120,36 @@ class Character(pg.sprite.Sprite):
         SETS A VARIABLE TO AN INT FROM 1-4 WHICH IS USED TO DETERMINE WHICH IMAGE IS LOADED IN ANIMATIONS
         ANIMATION INTERVAL DETERMINS HOW FAST THE ANIMATION CYCLES IN FPS
         """
-        self.counter[0] += 1
-        if self.counter[0] >= self.animation_interval:
-            self.counter[1] = (self.counter[1] +1) % 4
-            self.counter[0] = 0
+        current_tick = pg.time.get_ticks()
+        if current_tick - self.last_animation_change >= self.animation_interval:
+            
+            #KEEP ANIMATION FRAME WITHIN 0-3 
+            if self.animation_frame >= 3:
+                self.animation_frame = 0
+            else:
+                self.animation_frame += 1
+            
+            self.last_animation_change = current_tick
+    
+    def hit(self, damage):
+        self.health -= damage
+        Hit_Flash([self.visible_sprites], (self.rect.centerx, self.rect.centery+1))
+        self.check_alive()
+    
+    def check_alive(self):
+        if self.health <= 0:
+            self.kill()
+    
+    def add_health(self, hp):
+        self.health += hp
+        if self.health > 100:
+            self.health = 100
     
     def update(self):
         self.input()
         self.move()
         self.attack()
         self.increment_animations()
+        
+        if self.name == "player":
+            self.display_stats()

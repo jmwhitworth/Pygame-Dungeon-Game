@@ -1,6 +1,6 @@
 {
     "TILESIZE": 32,
     "FPS": 60,
-    "SCREENWIDTH": 1280,
-    "SCREENHEIGHT": 720
+    "SCREENWIDTH":  600,
+    "SCREENHEIGHT": 600
 }

@@ -1,8 +1,9 @@
 import pygame   as pg
 import sys
 
-from .constants  import *
-from .level      import Level
+from .constants import *
+from .level     import Level
+from .debug     import debug
 
 class WorldOfPhunne:
     """
@@ -28,8 +29,9 @@ class WorldOfPhunne:
                     pg.quit()
                     sys.exit()
             
-            self.screen.fill('black')
+            self.screen.fill((126,200,80))
             self.level.run() #UPDATE GAME EACH FRAME
+            debug(round(self.clock.get_fps(), 2))
             pg.display.update()
             self.clock.tick(FPS)
 

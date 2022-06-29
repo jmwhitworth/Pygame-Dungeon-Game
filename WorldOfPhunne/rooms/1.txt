@@ -1,32 +1,48 @@
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-x       xxxxx                  x
-x       xxxxx                  x
-x   xxxxxxxxxxx                x
-x   x                 e        x
-x   x                          x
-x   x            x             x
-x   x            x             x
-x          e     x             x
-x                x      xxx    x
-x                x      xxxxx  x
-x       x        x      xxx    x
-x      x   x     x      xxx    x
-x      x  xx     x      xxx    x
-x      xx  x     x      xxx xxxx
-x      x  xx     x      xxx    x
-x      xx  x     x      xxx    x
-x      x   x     x   xxxxxxxxxxx
-x                x             x
-x                x             x
-x         xxxxxxxx   e         x
-x                x             x
-x     e          x             x
-x                x xxx  x      x
-x                x      x      x
-x                x      x      x
-x     xxxxxxxxxxxx      x      x
-x       x                      x
-x       x      p        x      x
-x       x               x      x
-x                       x      x
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/
+////////////////////////////////////////////////
+t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/
+////////////////////////////////////////////////
+t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/
+////////////////////////////////////////////////
+t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/
+////////////////////////////////////////////////
+t/t/t/t/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxt/t/t/t/
+////////xfffffcfxxxxxffffffffffffffffffx////////
+t/t/t/t/xfffffffxxxxxf      fffffffffffxt/t/t/t/
+////////x  fxxxxxxxxxxx     fffffffffffx////////
+t/t/t/t/x  fx                 e     fffxt/t/t/t/
+////////x  fx                       fffx////////
+t/t/t/t/x   x  ffffff    xffff   c     xt/t/t/t/
+////////x   x  fffeff    xffff         x////////
+t/t/t/t/x      ffffff    xffff         xt/t/t/t/
+////////x      ffffff    xffff  xxx    x////////
+t/t/t/t/x                xffff  xxxxx fxt/t/t/t/
+////////x   f   x        xffff  xxx    x////////
+t/t/t/t/xfffff x   x     xffff  xxxffffxt/t/t/t/
+////////xfffff x  xx     xffff  xxxffffx////////
+xxxxxxxxxfffff xx  x     x      xxxfxxxxt/t/t/t/
+         fffff x  xx  fffx      xxxfcffx////////
+         fffff xx  x  fffx      xxxffffxt/t/t/t/
+xxxxxxxxxfffff x   x  fffx   xxxxxxxxxxx////////
+t/t/t/t/xfffff       ffffx       ffffffxt/t/t/t/
+////////xfffff      fffffx       ffffffx////////
+t/t/t/t/x ff      xxxxxxxx   e         xt/t/t/t/
+////////x                x             x////////
+t/t/t/t/x     e       f  x    fffffff  xt/t/t/t/
+////////x  ff        ffffx xxxffxf     x////////
+t/t/t/t/x  ff       fffffx   fffxf     xt/t/t/t/
+////////x fff     fffffffx     fx      x////////
+t/t/t/t/x fff xxxxxxxxxxxx      x      xt/t/t/t/
+////////x       xffffff c ff           x////////
+t/t/t/t/x       xffff  p        xffffffxt/t/t/t/
+////////xcfff   xf    f   f     xffcfffx////////
+t/t/t/t/xffff                   xffffffxt/t/t/t/
+////////xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx////////
+t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/
+////////////////////////////////////////////////
+t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/
+////////////////////////////////////////////////
+t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/
+////////////////////////////////////////////////
+t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/
+////////////////////////////////////////////////

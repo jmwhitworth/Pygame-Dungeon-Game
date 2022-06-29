@@ -6,8 +6,13 @@ from .constants     import *
 from .debug         import debug
 
 class Player(Character):
-    def __init__(self, name, position, sprite_groups, obstacle_sprites):
-        super().__init__(name, position, sprite_groups, obstacle_sprites)
+    """
+    SUBCLASS OF CHARACTER FOR THE GAMES PLAYER
+    HANDLES USER INPUT TO CONTROL THE CHARACTER ONSCREEN
+    PLAYER ART CREDIT: https://pixel-boy.itch.io/ninja-adventure-asset-pack
+    """
+    def __init__(self, name, position, sprite_groups, obstacle_sprites, target, damage):
+        super().__init__(name, position, sprite_groups, obstacle_sprites, target, damage)
         self.speed = 4
     
     def input(self):
@@ -17,11 +22,11 @@ class Player(Character):
         if keys[pg.K_UP] or keys[pg.K_w]:
             self.direction.y = -1
             self.facing = "North"
-            self.load_image(self.cycle_north[self.counter[1]])
+            self.load_image(self.cycle_north[self.animation_frame])
         elif keys[pg.K_DOWN] or keys[pg.K_s]:
             self.direction.y = 1
             self.facing = "South"
-            self.load_image(self.cycle_south[self.counter[1]])
+            self.load_image(self.cycle_south[self.animation_frame])
         else:
             self.direction.y = 0
         
@@ -29,11 +34,11 @@ class Player(Character):
         if keys[pg.K_RIGHT] or keys[pg.K_d]:
             self.direction.x = 1
             self.facing = "East"
-            self.load_image(self.cycle_east[self.counter[1]])
+            self.load_image(self.cycle_east[self.animation_frame])
         elif keys[pg.K_LEFT] or keys[pg.K_a]:
             self.direction.x = -1
             self.facing = "West"
-            self.load_image(self.cycle_west[self.counter[1]])
+            self.load_image(self.cycle_west[self.animation_frame])
         else:
             self.direction.x = 0
         
@@ -51,3 +56,8 @@ class Player(Character):
         #CHECK IF CHARACTER IS ATTACKING
         if keys[pg.K_SPACE]:
             self.attacking = True
+    
+    def display_stats(self):
+        #DISPLAY HEALTH
+        debug(f"Health: {self.health}", x=10, y=SCREENHEIGHT-30)
+        debug(f"Gold: {self.gold}", x=SCREENWIDTH-100, y=SCREENHEIGHT-30)
