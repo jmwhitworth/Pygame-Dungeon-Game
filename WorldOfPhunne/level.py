@@ -11,7 +11,10 @@ from .enemy     import Enemy
 from .treasure_chest    import Treasure_Chest
 from .move_room import Move_Room
 from .going_tile import Going_Tile
+from .sounds    import *
 from .debug     import debug
+from .prompt    import Prompt
+from .treasure_winner   import Treasure_Winner
 
 class Level():
     """
@@ -23,6 +26,7 @@ class Level():
         #SET UP SPRITE GROUPS
         self.visible_sprites  = YSortCameraGroup()
         self.obstacle_sprites = pg.sprite.Group()
+        self.prompts          = pg.sprite.Group()
         
         self.display_surface = pg.display.get_surface()
         
@@ -36,6 +40,9 @@ class Level():
         
         self.current_room = self.room_list[0]
         
+        pg.mixer.music.play(-1)
+        
+        self.complete = False
         self.reset_game()
         self.create_map(self.current_room)
     
@@ -83,6 +90,15 @@ class Level():
                 #ROOM MOVING TILES
                 elif col.lower() in self.room_list:
                     Move_Room(
+                        name     = col.lower(),
+                        position = (x, y),
+                        sprite_groups = [self.visible_sprites],
+                        level = self
+                    )
+                
+                #WINNER TREASURE
+                elif col.lower() == "m":
+                    Treasure_Winner(
                         name     = col.lower(),
                         position = (x, y),
                         sprite_groups = [self.visible_sprites],
@@ -142,6 +158,7 @@ class Level():
         LOADS ALL STANDARD DATA FROM CORE DATA DIRECTORIES
         PASSES THEM TO THE LIVE VERSIONS TO BE RESET
         """
+        self.complete = False
         for path in self.data_files:
             if path.endswith('.json'):
                 data = self.load_json_data(path, "core")
@@ -212,11 +229,18 @@ class Level():
         #DRAW ALL VISIBLE SPRITES
         self.visible_sprites.custom_draw(self.player)
         self.visible_sprites.update()
-
+        self.prompts.update()
         
         if self.player.health <= 0:
+            Prompt([self.visible_sprites, self.prompts], f"You died! Score: {self.player.gold}", "red")
             self.reset_game()
             self.create_map(1)
+        
+        if self.complete:
+            Prompt([self.visible_sprites, self.prompts], f"You Won! Score: {self.player.gold}", "Blue")
+            self.reset_game()
+            self.create_map(1)
+
 
 
 class YSortCameraGroup(pg.sprite.Group):

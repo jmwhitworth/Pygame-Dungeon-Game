@@ -61,8 +61,8 @@ class Player(Character):
         #DISPLAY HEALTH
         debug(f"Health: {self.health}", x=10, y=SCREENHEIGHT-30)
         debug(f"Gold: {self.gold}", x=SCREENWIDTH-100, y=SCREENHEIGHT-30)
-        debug(f"{self.rect.x}, {self.rect.y}", x=SCREENWIDTH-100, y=10)
-        debug(f"{self.going}", x=SCREENWIDTH-100, y=40)
+        #debug(f"{self.rect.x}, {self.rect.y}", x=SCREENWIDTH-100, y=10)
+        #debug(f"{self.going}", x=SCREENWIDTH-100, y=40)
 
     def check_alive(self):
         if self.health <= 0:

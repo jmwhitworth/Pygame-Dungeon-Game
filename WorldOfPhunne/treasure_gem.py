@@ -1,8 +1,8 @@
 import pygame       as pg
 import os
-import random
 
 from .constants     import *
+from .sounds         import *
 
 class Treasure_Gem(pg.sprite.Sprite):
     """
@@ -58,6 +58,7 @@ class Treasure_Gem(pg.sprite.Sprite):
                 if sprite.hitbox.colliderect(self.rect):
                     if sprite.name == "player":
                         sprite.gold += self.value[self.name]
+                        pg.mixer.Sound.play(sound_gold)
                         self.kill()
             except AttributeError:
                 pass

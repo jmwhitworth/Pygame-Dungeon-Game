@@ -3,6 +3,7 @@ import os
 
 from .constants     import *
 from .debug         import debug
+from .sounds         import *
 
 class Hit_Flash(pg.sprite.Sprite):
     """
@@ -19,6 +20,8 @@ class Hit_Flash(pg.sprite.Sprite):
         self.animation_frames = ["hit/1.png", "hit/2.png", "hit/3.png", "hit/4.png", "hit/5.png"]
         self.load_image(self.animation_frames[0])
         self.rect = self.image.get_rect(center = position)
+        
+        pg.mixer.Sound.play(sound_hit)
     
     def load_image(self, image_file_name, size=(48,48)):
         self.image = pg.image.load(os.path.join("assets/effects", image_file_name)).convert_alpha()

@@ -13,6 +13,7 @@ class WorldOfPhunne:
     """
     def __init__(self):
         pg.init()
+        pg.mixer.init()
         self.screen = pg.display.set_mode((SCREENWIDTH, SCREENHEIGHT))
         pg.display.set_caption("World of Phunne")
         self.clock = pg.time.Clock()

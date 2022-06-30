@@ -2,6 +2,7 @@ import pygame       as pg
 import os
 
 from .constants     import *
+from .sounds         import *
 
 class Treasure_Health(pg.sprite.Sprite):
     """
@@ -37,6 +38,7 @@ class Treasure_Health(pg.sprite.Sprite):
                 if sprite.hitbox.colliderect(self.rect):
                     if sprite.name == "player":
                         sprite.add_health(self.value)
+                        pg.mixer.Sound.play(sound_bonus)
                         self.kill()
             except AttributeError:
                 pass

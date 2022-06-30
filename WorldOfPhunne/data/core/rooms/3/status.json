@@ -12,6 +12,7 @@
         "4": {"Health": 100, "Position X": 263, "Position Y": 500}
     },
     "entries": {
-        "North": {"X": 300, "Y": 60}
+        "North": {"X": 300, "Y": 60},
+        "East": {"X": 2220, "Y": 459}
     }
 }

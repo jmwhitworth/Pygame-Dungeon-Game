@@ -2,6 +2,7 @@ import pygame       as pg
 import os
 
 from .constants     import *
+from .sounds         import *
 
 class Treasure_Coin(pg.sprite.Sprite):
     """
@@ -54,6 +55,7 @@ class Treasure_Coin(pg.sprite.Sprite):
                 if sprite.hitbox.colliderect(self.rect):
                     if sprite.name == "player":
                         sprite.gold += self.value
+                        pg.mixer.Sound.play(sound_coin)
                         self.kill()
             except AttributeError:
                 pass

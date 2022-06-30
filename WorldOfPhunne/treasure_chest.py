@@ -5,6 +5,7 @@ import random
 from .constants     import *
 from .hit_flash     import Hit_Flash
 from .treasure_gem  import Treasure_Gem
+from .sounds         import *
 
 class Treasure_Chest(pg.sprite.Sprite):
     """
@@ -57,6 +58,7 @@ class Treasure_Chest(pg.sprite.Sprite):
                 position = (self.rect.x, self.rect.y+20),
                 sprite_groups = [self.visible_sprites]
             )
+        pg.mixer.Sound.play(sound_bonus)
 
     def get_info(self):
         data = {

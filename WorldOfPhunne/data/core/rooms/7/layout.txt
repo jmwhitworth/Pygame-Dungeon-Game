@@ -7,22 +7,22 @@ t/t/t/t/t/t/t/t/t/t/t/
 t/t/t/t/t/t/t/t/t/t/t/
 //////////////////////
 t/t/t/xxxxxxxxxxt/t/t/
-//////x        x//////
+//////xt/    t/x//////
+t/t/t/x//    /xt/t/t/
+//////x  fff   x//////
+t/t/t/x ffffff xt/t/t/
+//////x fffmff x//////
+t/t/t/x fffffffxt/t/t/
+//////x    fff x//////
+t/t/t/x t/     xt/t/t/
+//////x //     x//////
 t/t/t/x        xt/t/t/
-//////x        x//////
-t/t/t/x        xt/t/t/
-//////x        x//////
-t/t/t/x        xt/t/t/
-//////x        x//////
-t/t/t/x        xt/t/t/
-//////x        x//////
-t/t/t/x        xt/t/t/
-//////xxxxxxxxxx//////
-t/t/t/t/t/t/t/t/t/t/t/
-//////////////////////
-t/t/t/t/t/t/t/t/t/t/t/
-//////////////////////
-t/t/t/t/t/t/t/t/t/t/t/
-//////////////////////
-t/t/t/t/t/t/t/t/t/t/t/
-//////////////////////
+//////xxx  xxxxx//////
+t/t/t/t/x  xt/t/t/t/t/
+////////x  x//////////
+t/t/t/t/x  xt/t/t/t/t/
+////////x  x//////////
+t/t/t/t/x  xt/t/t/t/t/
+////////x  x//////////
+t/t/t/t/xnnxt/t/t/t/t/
+////////x22x//////////

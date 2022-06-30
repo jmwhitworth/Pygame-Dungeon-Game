@@ -5,6 +5,7 @@ from .constants     import *
 from .debug         import debug
 from .attack        import Attack
 from .hit_flash     import Hit_Flash
+from .sounds import *
 
 class Character(pg.sprite.Sprite):
     """
@@ -91,7 +92,8 @@ class Character(pg.sprite.Sprite):
                     attack_position = (self.rect.x - self.rect.width, self.rect.y)
                 
                 Attack([self.visible_sprites], attack_position, self.attack_animation_duration, self.visible_sprites, [self.target, "treasure_chest"], self.damage)
-                
+                pg.mixer.Sound.play(sound_sword)
+
                 self.last_attack_frame = current_tick
         self.attacking = False
     
@@ -139,6 +141,7 @@ class Character(pg.sprite.Sprite):
     
     def check_alive(self):
         if self.health <= 0:
+            pg.mixer.Sound.play(sound_kill)
             self.kill()
     
     def add_health(self, hp):

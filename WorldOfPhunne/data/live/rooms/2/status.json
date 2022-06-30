@@ -2,11 +2,22 @@
     "enemies": {
         "0": {
             "Health": 100,
-            "Position X": 108,
-            "Position Y": 108
+            "Position X": 293,
+            "Position Y": 337
+        },
+        "1": {
+            "Health": 100,
+            "Position X": 417,
+            "Position Y": 533
         }
     },
-    "chests": {},
+    "chests": {
+        "0": {
+            "Health": 1,
+            "Position X": 293,
+            "Position Y": 415
+        }
+    },
     "entries": {
         "East": {
             "X": 614,
@@ -15,6 +26,10 @@
         "South": {
             "X": 300,
             "Y": 802
+        },
+        "North": {
+            "X": 325,
+            "Y": 64
         }
     }
 }

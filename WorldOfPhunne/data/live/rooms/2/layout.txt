@@ -1,17 +1,17 @@
-t/t/t/t/t/t/t/t/t/t/t/
-//////////////////////
-t/t/t/t/t/t/t/t/t/t/t/
-//////////////////////
-t/t/t/t/t/t/t/t/t/t/t/
-//////////////////////
-t/t/t/t/t/t/t/t/t/t/t/
-//////////////////////
-t/t/t/xxxxxxxxxxt/t/t/
+t/t/t/t/x71xt/t/t/t/t/
+////////xssx//////////
+t/t/t/t/x  xt/t/t/t/t/
+////////x  x//////////
+t/t/t/t/x  xt/t/t/t/t/
+////////x  x//////////
+t/t/t/t/x  xt/t/t/t/t/
+////////x  x//////////
+t/t/t/xxx  xxxxxt/t/t/
 //////xf    fffx//////
 t/t/t/x      ffxt/t/t/
 //////xff     fx//////
 t/t/t/xfff     xxxxxxx
-//////xffcf    p    w1
+//////xffff    p    w1
 t/t/t/xffff         w5
 //////x  f     xxxxxxx
 t/t/t/x      ffxt/t/t/

@@ -13,7 +13,7 @@ t/t/t/x      ffx  xxx             xffffffffffffx               ffxt/t/t/
 t/t/t/xfff                        xffffffffffffx                 xxxxfff
 //////xffff                       xffffffffffffx         x          xxxx
 t/t/t/xffff                                              xf           w5
-//////x  f               fffffffx                  ffffffxfff         w5
+//////x  f               fffffffx                  ffffffxfff         w6
 t/t/t/x      ff      fffffffffffxxx              ffffffffxfff       xxxx
 //////xf    fff fffffffffffffffffff      ffffffffffffffffxfffffffxxxxfff
 t/t/t/xffffffffffffffffffffffffffff      ffffffffffffffffxfffffffxt/t/t/
