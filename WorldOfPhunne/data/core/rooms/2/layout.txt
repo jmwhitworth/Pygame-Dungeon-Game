@@ -1,0 +1,28 @@
+t/t/t/t/t/t/t/t/t/t/t/
+//////////////////////
+t/t/t/t/t/t/t/t/t/t/t/
+//////////////////////
+t/t/t/t/t/t/t/t/t/t/t/
+//////////////////////
+t/t/t/t/t/t/t/t/t/t/t/
+//////////////////////
+t/t/t/xxxxxxxxxxt/t/t/
+//////xf    fffx//////
+t/t/t/x      ffxt/t/t/
+//////xff     fx//////
+t/t/t/xfff     xxxxxxx
+//////xffcf    p    w1
+t/t/t/xffff         w5
+//////x  f     xxxxxxx
+t/t/t/x      ffxt/t/t/
+//////xf    fffx//////
+t/t/t/xffffffffxt/t/t/
+//////xxx  xxxxx//////
+t/t/t/t/x  xt/t/t/t/t/
+////////x  x//////////
+t/t/t/t/x  xt/t/t/t/t/
+////////x  x//////////
+t/t/t/t/x  xt/t/t/t/t/
+////////x  x//////////
+t/t/t/t/xnnxt/t/t/t/t/
+////////x43x//////////

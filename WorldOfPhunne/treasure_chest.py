@@ -12,10 +12,10 @@ class Treasure_Chest(pg.sprite.Sprite):
     ON HIT THE STATE CHANGES TO OPEN AND IT SPAWNS RANDOM TREASURE
     ART CREDIT: https://pixel-boy.itch.io/ninja-adventure-asset-pack
     """
-    def __init__(self, name, position, sprite_groups):
+    def __init__(self, name, position, sprite_groups, health):
         super().__init__(sprite_groups)
         
-        self.health = 1
+        self.health = health
         self.visible_sprites = sprite_groups[0]
         
         #ROLL FOR LOOT TYPE TO SPAWN
@@ -26,7 +26,11 @@ class Treasure_Chest(pg.sprite.Sprite):
         }
         
         self.name = name
-        self.load_image("treasure_chest/closed.png")
+        if self.health == 1:
+            self.load_image("treasure_chest/closed.png")
+        else:
+            self.load_image("treasure_chest/open.png")
+
         self.rect = self.image.get_rect(topleft = position)
         self.hitbox = self.rect.inflate(0,-10)
     
@@ -53,3 +57,11 @@ class Treasure_Chest(pg.sprite.Sprite):
                 position = (self.rect.x, self.rect.y+20),
                 sprite_groups = [self.visible_sprites]
             )
+
+    def get_info(self):
+        data = {
+            "Health": self.health,
+            "Position X": self.rect.x,
+            "Position Y": self.rect.y,
+        }
+        return data

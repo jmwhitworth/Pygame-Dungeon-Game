@@ -1,0 +1,28 @@
+t/t/t/t/x21xt/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/
+////////xssx////////////////////////////////////////////////////////////
+t/t/t/t/x  xt/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/
+////////x  x////////////////////////////////////////////////////////////
+t/t/t/t/x  xt/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/
+////////x  x////////////////////////////////////////////////////////////
+t/t/t/t/x  xt/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/
+////////x  x////////////////////////////////////////////////////////////
+t/t/t/xxx  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxt/t/t/
+//////xf    fffx                                    fffffffffffffx//////
+t/t/t/x      ffx  xxx             xffffffffffffx               ffxt/t/t/
+//////xff     fx  xff             xffffffffffffx               ffx//////
+t/t/t/xfff                        xffffffffffffx                 xxxxfff
+//////xffff                       xffffffffffffx         x          xxxx
+t/t/t/xffff                                              xf           w5
+//////x  f               fffffffx                  ffffffxfff         w5
+t/t/t/x      ff      fffffffffffxxx              ffffffffxfff       xxxx
+//////xf    fff fffffffffffffffffff      ffffffffffffffffxfffffffxxxxfff
+t/t/t/xffffffffffffffffffffffffffff      ffffffffffffffffxfffffffxt/t/t/
+//////xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx//////
+t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/
+////////////////////////////////////////////////////////////////////////
+t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/
+////////////////////////////////////////////////////////////////////////
+t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/
+////////////////////////////////////////////////////////////////////////
+t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/t/
+////////////////////////////////////////////////////////////////////////

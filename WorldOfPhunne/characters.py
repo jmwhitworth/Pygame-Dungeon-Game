@@ -13,18 +13,19 @@ class Character(pg.sprite.Sprite):
         - COLLISION WITH OBSTACLE SPRITES
         - ANIMATION CYCLING
     """
-    def __init__(self, name, position, sprite_groups, obstacle_sprites, target, damage):
+    def __init__(self, name, position, sprite_groups, obstacle_sprites, target, damage, health, gold=0):
         super().__init__(sprite_groups)
         
-        self.health = 100
+        self.health = health
         self.name = name
         self.target = target
         self.damage = damage
         self.direction = pg.math.Vector2()
         self.facing = "South" #DETERMINES IDLE SPRITE
+        self.going = "South" #DETEMINES ENTRY POINT OF NEXT ROOM
         self.speed = 1
         self.visible_sprites = sprite_groups[0]
-        self.gold = 0
+        self.gold = gold
         
         self.animation_interval = 100 #FREQUENCY TO CHANGE ANIMATION FRAME IN MS
         self.last_animation_change = 0 #GAME TICK OF LAST CHANGE
@@ -144,6 +145,17 @@ class Character(pg.sprite.Sprite):
         self.health += hp
         if self.health > 100:
             self.health = 100
+    
+    def get_info(self):
+        data = {
+            "Health": self.health,
+            "Position X": self.rect.x,
+            "Position Y": self.rect.y,
+        }
+        if self.name == "player":
+            data["Gold"] = self.gold
+            data["Going"] = self.going
+        return data
     
     def update(self):
         self.input()

@@ -11,8 +11,8 @@ class Player(Character):
     HANDLES USER INPUT TO CONTROL THE CHARACTER ONSCREEN
     PLAYER ART CREDIT: https://pixel-boy.itch.io/ninja-adventure-asset-pack
     """
-    def __init__(self, name, position, sprite_groups, obstacle_sprites, target, damage):
-        super().__init__(name, position, sprite_groups, obstacle_sprites, target, damage)
+    def __init__(self, name, position, sprite_groups, obstacle_sprites, target, damage, health, gold):
+        super().__init__(name, position, sprite_groups, obstacle_sprites, target, damage, health, gold)
         self.speed = 4
     
     def input(self):
@@ -61,3 +61,9 @@ class Player(Character):
         #DISPLAY HEALTH
         debug(f"Health: {self.health}", x=10, y=SCREENHEIGHT-30)
         debug(f"Gold: {self.gold}", x=SCREENWIDTH-100, y=SCREENHEIGHT-30)
+        debug(f"{self.rect.x}, {self.rect.y}", x=SCREENWIDTH-100, y=10)
+        debug(f"{self.going}", x=SCREENWIDTH-100, y=40)
+
+    def check_alive(self):
+        if self.health <= 0:
+            self.kill()

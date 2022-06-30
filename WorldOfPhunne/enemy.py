@@ -13,8 +13,8 @@ class Enemy(Character):
     MOVES TOWARDS PLAYER WHEN WITHIN SPECIFIED RANGE, AND ATTACKS WHEN CLOSE ENOUGH
     ENEMY ART CREDIT: https://pixel-boy.itch.io/ninja-adventure-asset-pack
     """
-    def __init__(self, name, position, sprite_groups, obstacle_sprites, target, damage):
-        super().__init__(name, position, sprite_groups, obstacle_sprites, target, damage)
+    def __init__(self, name, position, sprite_groups, obstacle_sprites, target, damage, health):
+        super().__init__(name, position, sprite_groups, obstacle_sprites, target, damage, health)
         self.speed = 2
         self.damage = damage
         

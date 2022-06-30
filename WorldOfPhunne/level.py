@@ -1,12 +1,16 @@
 import pygame   as pg
 import os
 import random
+import json
+import time
 
 from .constants import *
 from .scenery   import Scenery
 from .player    import Player
 from .enemy     import Enemy
 from .treasure_chest    import Treasure_Chest
+from .move_room import Move_Room
+from .going_tile import Going_Tile
 from .debug     import debug
 
 class Level():
@@ -17,19 +21,32 @@ class Level():
     """
     def __init__(self):
         #SET UP SPRITE GROUPS
-        self.visible_sprites   = YSortCameraGroup()
-        self.obstacle_sprites  = pg.sprite.Group()
+        self.visible_sprites  = YSortCameraGroup()
+        self.obstacle_sprites = pg.sprite.Group()
         
         self.display_surface = pg.display.get_surface()
         
-        self.create_map(1)
+        self.data_files = ["player.json"]
+        self.room_list = ['1', '2', '3', '4', '5', '6', '7']
+        [self.data_files.append(f"rooms/{room}/status.json") for room in self.room_list]
+        [self.data_files.append(f"rooms/{room}/layout.txt") for room in self.room_list]
+        
+        self.going_dict = {"n":"North","e":"East","s":"South","w":"West"}
+        self.direction_list = ['n', 'e', 's', 'w']
+        
+        self.current_room = self.room_list[0]
+        
+        self.reset_game()
+        self.create_map(self.current_room)
     
-    def create_map(self, level=1):
+    def create_map(self, level='1'):
+        self.current_room = level
+        
         self.visible_sprites.empty()
         self.obstacle_sprites.empty()
         
         #LOAD THE LEVEL FILE PASSED AS PARAMETER
-        with open(os.path.join("WorldOfPhunne/rooms", f"{level}.txt"), 'r') as level_file:
+        with open(os.path.join(f"WorldOfPhunne/data/live/rooms/{level}", "layout.txt"), 'r') as level_file:
             world_map = level_file.readlines()
         
         #GENERATE TERRAIN AND PLAYER BASED ON MAP FILE
@@ -63,47 +80,142 @@ class Level():
                         size     = (64,64)
                     )
                 
-                #TREASURE CHESTS
-                elif col.lower() == 'c':
-                    Treasure_Chest(
-                        name     = "treasure_chest",
+                #ROOM MOVING TILES
+                elif col.lower() in self.room_list:
+                    Move_Room(
+                        name     = col.lower(),
                         position = (x, y),
-                        sprite_groups = [self.visible_sprites, self.obstacle_sprites]
+                        sprite_groups = [self.visible_sprites],
+                        level = self
                     )
                 
-                #PLAYER
-                elif col.lower() == 'p':
-                    self.player = Player(
-                        name             = "player",
-                        position         = (x, y),
-                        sprite_groups    = [self.visible_sprites], #MUST PASS 'visible_sprites' FIRST
-                        obstacle_sprites = self.obstacle_sprites,
-                        target           = "enemy",
-                        damage           = 100
+                #GOING TILES
+                elif col.lower() in self.direction_list:
+                    Going_Tile(
+                        name     = self.going_dict[col.lower()],
+                        position = (x, y),
+                        sprite_groups = [self.visible_sprites]
                     )
+                
+        player_data = self.load_json_data("player.json")
+        room_sprite_data = self.load_json_data(f"rooms/{level}/status.json")
         
-        #ENEMIES CREATED ON SECOND PASS SO THAT PLAYER IS AVAILABLE TO PASS TO THEM AS ARG
-        for row_index, row in enumerate(world_map):
-            for col_index, col in enumerate(row):
-                x = col_index * TILESIZE
-                y = row_index * TILESIZE
-                if col.lower() == 'e':
+        self.player = Player(
+            name             = "player",
+            position         = (room_sprite_data["entries"][player_data["Going"]]["X"], room_sprite_data["entries"][player_data["Going"]]["Y"]),
+            sprite_groups    = [self.visible_sprites], #MUST PASS 'visible_sprites' FIRST
+            obstacle_sprites = self.obstacle_sprites,
+            target           = "enemy",
+            damage           = 100,
+            health           = player_data["Health"],
+            gold             = player_data["Gold"]
+        )
+        
+        try:
+            for chest in room_sprite_data["chests"]:
+                Treasure_Chest(
+                    name     = "treasure_chest",
+                    position = (room_sprite_data["chests"][chest]["Position X"], room_sprite_data["chests"][chest]["Position Y"]),
+                    sprite_groups = [self.visible_sprites, self.obstacle_sprites],
+                    health   = room_sprite_data["chests"][chest]["Health"]
+                )
+        except KeyError:
+            print("No chests data provided this room.")
+        
+        try:
+            for enemy in room_sprite_data["enemies"]:
+                if room_sprite_data["enemies"][enemy]["Health"] > 0:
                     Enemy(
                         name             = "enemy",
-                        position         = (x, y),
+                        position         = (room_sprite_data["enemies"][enemy]["Position X"], room_sprite_data["enemies"][enemy]["Position Y"]),
                         sprite_groups    = [self.visible_sprites], #MUST PASS 'visible_sprites' FIRST
                         obstacle_sprites = self.obstacle_sprites,
                         target           = self.player,
-                        damage           = 40
+                        damage           = 40,
+                        health   = room_sprite_data["enemies"][enemy]["Health"]
                     )
+        except KeyError:
+            print("No enemy data provided this room.")
+    
+    def reset_game(self):
+        """
+        LOADS ALL STANDARD DATA FROM CORE DATA DIRECTORIES
+        PASSES THEM TO THE LIVE VERSIONS TO BE RESET
+        """
+        for path in self.data_files:
+            if path.endswith('.json'):
+                data = self.load_json_data(path, "core")
+                self.write_json_data(path, data)
+            elif path.endswith('.txt'):
+                data = self.load_text_data(path, "core")
+                self.write_text_data(path, data)
+            print(f"Reset: {path}")
+    
+    def write_json_data(self, path, data):
+        """
+        WRITES GIVEN DATA TO THE LIVE VERSIONS OF THE PATH PROVIDED
+        """
+        path = os.path.join("WorldOfPhunne/data/live/", path)
+        
+        with open(path, 'w+', encoding='utf-8') as file:
+            json.dump(data, file, ensure_ascii=False, indent=4)
+    
+    def load_json_data(self, path, data_type="live"):
+        """
+        LOADS EITHER CORE OR LIVE DATA OF THE PATH GIVEN AS JSON
+        """
+        path = os.path.join(f"WorldOfPhunne/data/{data_type}/", path)
+        print(f"Loading data from: {path}")
+        with open(path, 'r') as status_file:
+            status = json.load(status_file)
+        return status
+    
+    def write_text_data(self, path, data):
+        """
+        WRITES GIVEN DATA TO THE LIVE VERSIONS OF THE PATH PROVIDED
+        """
+        path = os.path.join("WorldOfPhunne/data/live/", path)
+        with open(path, 'w+') as file:
+            file.writelines(data)
+    
+    def load_text_data(self, path, data_type="live"):
+        """
+        LOADS EITHER CORE OR LIVE DATA OF THE PATH GIVEN AS JSON
+        """
+        path = os.path.join(f"WorldOfPhunne/data/{data_type}/", path)
+        print(f"Loading data from: {path}")
+        with open(path, 'r') as layout_file:
+            content = layout_file.read()
+        return content
+    
+    def save_room_state(self, room):
+        data = self.load_json_data(f"rooms/{room}/status.json")
+        data["chests"] = {}
+        data["enemies"] = {}
+        count = 0
+        for sprite in self.visible_sprites:
+            if sprite.name == "treasure_chest":
+                data["chests"][count] = {"Health": sprite.health, "Position X": sprite.rect.x, "Position Y": sprite.rect.y}
+                count += 1
+        count = 0
+        for sprite in self.visible_sprites:
+            if sprite.name == "enemy":
+                data["enemies"][count] = {"Health": sprite.health, "Position X": sprite.rect.x, "Position Y": sprite.rect.y}
+                count += 1
+        self.write_json_data(f"rooms/{room}/status.json", data)
+    
+    def save_player_state(self):
+        data = self.player.get_info()
+        self.write_json_data("player.json", data)
     
     def run(self):
         #DRAW ALL VISIBLE SPRITES
         self.visible_sprites.custom_draw(self.player)
         self.visible_sprites.update()
+
         
-        #RESET GAME IF PLAYER DIES
         if self.player.health <= 0:
+            self.reset_game()
             self.create_map(1)
 
 
