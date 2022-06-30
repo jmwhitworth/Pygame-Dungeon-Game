@@ -1,0 +1,12 @@
+{
+    "chests": {
+        "0": {"Health": 1, "Position X": 322, "Position Y": 474}
+    },
+    "enemies": {
+        "0": {"Health": 100, "Position X": 416, "Position Y": 474},
+        "1": {"Health": 100, "Position X": 258, "Position Y": 474}
+    },
+    "entries": {
+        "North": {"X": 300, "Y": 60}
+    }
+}

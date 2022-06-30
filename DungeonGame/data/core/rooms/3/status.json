@@ -1,0 +1,18 @@
+{
+    "chests": {
+        "0": {"Health": 1, "Position X": 529, "Position Y": 295},
+        "1": {"Health": 1, "Position X": 1201, "Position Y": 539},
+        "2": {"Health": 1, "Position X": 1665, "Position Y": 369}
+    },
+    "enemies": {
+        "0": {"Health": 100, "Position X": 1689, "Position Y": 523},
+        "1": {"Health": 100, "Position X": 1391, "Position Y": 365},
+        "2": {"Health": 100, "Position X": 1063, "Position Y": 482},
+        "3": {"Health": 100, "Position X": 643, "Position Y": 508},
+        "4": {"Health": 100, "Position X": 263, "Position Y": 500}
+    },
+    "entries": {
+        "North": {"X": 300, "Y": 60},
+        "East": {"X": 2220, "Y": 459}
+    }
+}

@@ -1,0 +1,15 @@
+{
+    "chests": {
+        "0": {"Health": 1, "Position X": 882, "Position Y": 365},
+        "1": {"Health": 1, "Position X": 594, "Position Y": 493},
+        "2": {"Health": 1, "Position X": 611, "Position Y": 383}
+    },
+    "enemies": {
+        "0": {"Health": 100, "Position X": 512, "Position Y": 405},
+        "1": {"Health": 100, "Position X": 861, "Position Y": 464},
+        "2": {"Health": 100, "Position X": 222, "Position Y": 281}
+    },
+    "entries": {
+        "West": {"X": 60, "Y": 422}
+    }
+}
