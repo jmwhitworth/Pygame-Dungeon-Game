@@ -9,14 +9,14 @@ A micro dungeon game
 - Compiled to .exe using pyinstaller
 
 # Tech Stack
-1. [Python 3.10.4](https://www.python.org/)
-2. [Pygame 2](https://www.pygame.org/news)
+1. [Python 3.10.4](https://www.python.org/){:target="_blank"}
+2. [Pygame 2](https://www.pygame.org/news){:target="_blank"}
 
 # Sample
-![Preview](http://i.imgur.com/QOjcAOnh.gif)
+![Preview](http://i.imgur.com/QOjcAOnh.gif){:target="_blank"}
 
 # Credits
-[Sprites & Sounds](https://pixel-boy.itch.io/ninja-adventure-asset-pack)
+[Sprites & Sounds](https://pixel-boy.itch.io/ninja-adventure-asset-pack){:target="_blank"}
 
 # Notes
 This project is not intended for further development by myself at this time. I hope you can learn something from it if that's why you're her. Please feel free to leave feedback and, if you feel inclined to do so, pull requests are welcome.
