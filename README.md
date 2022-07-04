@@ -13,7 +13,7 @@ A micro dungeon game
 2. [Pygame 2](https://www.pygame.org/news)
 
 # Sample
-![Preview](https://i.imgur.com/QOjcAOn.mp4)
+![Preview]http://i.imgur.com/QOjcAOnh.gif
 
 # Credits
 [Sprites & Sounds](https://pixel-boy.itch.io/ninja-adventure-asset-pack)
