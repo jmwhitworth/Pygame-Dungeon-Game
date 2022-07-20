@@ -18,6 +18,7 @@ class Treasure_Chest(pg.sprite.Sprite):
         
         self.health = health
         self.visible_sprites = sprite_groups[0]
+        self.openned = False
         
         #ROLL FOR LOOT TYPE TO SPAWN
         self.contents = random.randrange(0,2)
@@ -51,14 +52,15 @@ class Treasure_Chest(pg.sprite.Sprite):
         """
         IF HEALTH < 0: CHANGE SPRITE TO OPEN CHEST AND SPAWN LOOT BELOW CHEST
         """
-        if self.health <= 0:
+        if self.health <= 0 and not self.openned:
             self.load_image("treasure_chest/open.png")
-        Treasure_Gem(
-                name     = self.treasures[self.contents], #ART CREDIT https://pixel-boy.itch.io/ninja-adventure-asset-pack
-                position = (self.rect.x, self.rect.y+20),
-                sprite_groups = [self.visible_sprites]
-            )
-        pg.mixer.Sound.play(sound_bonus)
+            Treasure_Gem(
+                    name     = self.treasures[self.contents], #ART CREDIT https://pixel-boy.itch.io/ninja-adventure-asset-pack
+                    position = (self.rect.x, self.rect.y+20),
+                    sprite_groups = [self.visible_sprites]
+                )
+            pg.mixer.Sound.play(sound_bonus)
+            self.openned = True
 
     def get_info(self):
         data = {
