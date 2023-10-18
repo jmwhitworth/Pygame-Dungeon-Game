@@ -8,8 +8,8 @@ A micro dungeon game
 - Compiled to .exe using pyinstaller
 
 # Tech Stack
-1. [Python 3.10.4](https://www.python.org/)
-2. [Pygame 2.5.2](https://www.pygame.org/news)
+1. [Python ^3.10](https://www.python.org/)
+2. [Pygame ^2.5](https://www.pygame.org/news)
 
 # Sample
 ![Preview](http://i.imgur.com/QOjcAOnh.gif)
